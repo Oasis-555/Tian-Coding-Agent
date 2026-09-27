@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+settings.json
+.memory/
+.venv/
+.idea/
+.py-coding-agent/
+__pycache__/
+*.pyc
+src/*.egg-info/
