@@ -1,0 +1,84 @@
+{
+  "task_id": "fix_parse_bool",
+  "run_index": 1,
+  "success": true,
+  "mode": "live",
+  "duration_ms": 98608,
+  "llm_calls": [
+    {
+      "duration_ms": 3222,
+      "input_tokens": 2190,
+      "output_tokens": 126,
+      "total_tokens": 2316,
+      "cached_input_tokens": 1536,
+      "reasoning_tokens": 107,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 4245,
+      "input_tokens": 2343,
+      "output_tokens": 193,
+      "total_tokens": 2536,
+      "cached_input_tokens": 2048,
+      "reasoning_tokens": 59,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 3192,
+      "input_tokens": 2557,
+      "output_tokens": 131,
+      "total_tokens": 2688,
+      "cached_input_tokens": 2048,
+      "reasoning_tokens": 22,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 38041,
+      "input_tokens": 508,
+      "output_tokens": 1750,
+      "total_tokens": 2258,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 1598,
+      "token_source": "provider",
+      "tool_specs": 0
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "read_file",
+      "args": {
+        "path": "config_utils.py"
+      },
+      "is_error": false,
+      "duration_ms": 2,
+      "repeated": false,
+      "changed_files": [],
+      "rolled_back_files": []
+    },
+    {
+      "name": "edit_file",
+      "args": {
+        "path": "config_utils.py",
+        "old": "def parse_bool(value):\n    return bool(value)",
+        "new": "def parse_bool(value):\n    if isinstance(value, bool):\n        return value\n    if isinstance(value, str):\n        lowered = value.lower()\n        if lowered in (\"true\", \"yes\", \"1\", \"on\"):\n            return True\n        if lowered in (\"false\", \"no\", \"0\", \"off\"):\n            return False\n    raise ValueError(f\"cannot parse bool: {value!r}\")"
+      },
+      "is_error": false,
+      "duration_ms": 3,
+      "repeated": false,
+      "changed_files": [
+        "config_utils.py"
+      ],
+      "rolled_back_files": []
+    }
+  ],
+  "context_events": [],
+  "checker_command": "D:\\pi-mono\\pi-mono-main\\py-coding-agent\\.venv\\Scripts\\python.exe -c \"from config_utils import parse_bool; assert all(parse_bool(v) for v in [True,'TRUE','yes','1','On']); assert not any(parse_bool(v) for v in [False,'FALSE','no','0','off'])\"",
+  "checker_exit_code": 0,
+  "checker_output": "",
+  "final_answer": "Fixed `config_utils.py`:\n\n- `parse_bool(value)` now:\n  - Returns `True`/`False` if `value` is already a `bool`\n  - Accepts case-insensitive strings `\"true\"`, `\"yes\"`, `\"1\"`, `\"on\"` → `True`\n  - Accepts case-insensitive strings `\"false\"`, `\"no\"`, `\"0\"`, `\"off\"` → `False`\n  - Raises `ValueError` for any other input\n\nChanged file: `config_utils.py`",
+  "error": "",
+  "failure_type": ""
+}

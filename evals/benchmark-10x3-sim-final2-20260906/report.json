@@ -1,0 +1,30 @@
+{
+  "tasks": 10,
+  "runs": 30,
+  "k": 3,
+  "result": {
+    "pass_rate": 1.0,
+    "pass_at_k": 1.0,
+    "pass_power_k": 1.0
+  },
+  "efficiency": {
+    "scope": "successful_runs",
+    "avg_input_tokens": 7772.3,
+    "avg_output_tokens": 170.6,
+    "avg_total_tokens": 7942.9,
+    "avg_cached_input_tokens": 0.0,
+    "avg_reasoning_tokens": 0.0,
+    "avg_duration_ms": 300.53333333333336,
+    "p50_duration_ms": 194,
+    "p95_duration_ms": 1009,
+    "avg_llm_calls": 3.0,
+    "avg_tool_calls": 1.0
+  },
+  "process": {
+    "invalid_tool_call_rate": 0.0,
+    "repeated_tool_call_rate": 0.0,
+    "rollback_rate": 0.0,
+    "compact_events": 0
+  },
+  "failures": {}
+}

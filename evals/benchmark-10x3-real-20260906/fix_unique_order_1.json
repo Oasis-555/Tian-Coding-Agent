@@ -1,0 +1,127 @@
+{
+  "task_id": "fix_unique_order",
+  "run_index": 1,
+  "success": true,
+  "mode": "live",
+  "duration_ms": 124858,
+  "llm_calls": [
+    {
+      "duration_ms": 2165,
+      "input_tokens": 2184,
+      "output_tokens": 75,
+      "total_tokens": 2259,
+      "cached_input_tokens": 1536,
+      "reasoning_tokens": 59,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 1228,
+      "input_tokens": 2286,
+      "output_tokens": 32,
+      "total_tokens": 2318,
+      "cached_input_tokens": 2048,
+      "reasoning_tokens": 13,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 13608,
+      "input_tokens": 2347,
+      "output_tokens": 688,
+      "total_tokens": 3035,
+      "cached_input_tokens": 2048,
+      "reasoning_tokens": 616,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 2281,
+      "input_tokens": 3074,
+      "output_tokens": 90,
+      "total_tokens": 3164,
+      "cached_input_tokens": 2048,
+      "reasoning_tokens": 33,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 3494,
+      "input_tokens": 3203,
+      "output_tokens": 151,
+      "total_tokens": 3354,
+      "cached_input_tokens": 2048,
+      "reasoning_tokens": 80,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 35497,
+      "input_tokens": 532,
+      "output_tokens": 1698,
+      "total_tokens": 2230,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 1487,
+      "token_source": "provider",
+      "tool_specs": 0
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "list_dir",
+      "args": {
+        "path": "."
+      },
+      "is_error": false,
+      "duration_ms": 2,
+      "repeated": false,
+      "changed_files": [],
+      "rolled_back_files": []
+    },
+    {
+      "name": "read_file",
+      "args": {
+        "path": "collections_utils.py"
+      },
+      "is_error": false,
+      "duration_ms": 1,
+      "repeated": false,
+      "changed_files": [],
+      "rolled_back_files": []
+    },
+    {
+      "name": "write_file",
+      "args": {
+        "path": "collections_utils.py",
+        "content": "def unique_in_order(items):\n    seen = []\n    result = []\n    for item in items:\n        if item not in seen:\n            seen.append(item)\n            result.append(item)\n    return result\n"
+      },
+      "is_error": false,
+      "duration_ms": 3,
+      "repeated": false,
+      "changed_files": [
+        "collections_utils.py"
+      ],
+      "rolled_back_files": []
+    },
+    {
+      "name": "bash",
+      "args": {
+        "command": "python -c \"from collections_utils import unique_in_order; print(unique_in_order([1,2,2,3,1])); print(unique_in_order([[1],[1],[2]]))\""
+      },
+      "is_error": false,
+      "duration_ms": 152,
+      "repeated": false,
+      "changed_files": [
+        "__pycache__/collections_utils.cpython-36.pyc"
+      ],
+      "rolled_back_files": []
+    }
+  ],
+  "context_events": [],
+  "checker_command": "D:\\pi-mono\\pi-mono-main\\py-coding-agent\\.venv\\Scripts\\python.exe -c \"from collections_utils import unique_in_order; assert unique_in_order([3,1,3,2,1])==[3,1,2]; assert unique_in_order([[1],[2],[1]])==[[1],[2]]; assert unique_in_order([])==[]\"",
+  "checker_exit_code": 0,
+  "checker_output": "",
+  "final_answer": "Fixed `collections_utils.py`:\n\n- Replaced `list(set(items))` with an order-preserving loop that tracks seen items in a list.\n- This preserves first-seen order and works with unhashable items (e.g., lists) because it uses equality-based containment checks instead of hashing.\n\n**Changed file:** `collections_utils.py`",
+  "error": "",
+  "failure_type": ""
+}

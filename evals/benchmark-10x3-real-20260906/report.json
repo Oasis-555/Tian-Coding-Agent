@@ -1,0 +1,32 @@
+{
+  "tasks": 10,
+  "runs": 30,
+  "k": 3,
+  "result": {
+    "pass_rate": 0.9666666666666667,
+    "pass_at_k": 1.0,
+    "pass_power_k": 0.9
+  },
+  "efficiency": {
+    "scope": "successful_runs",
+    "avg_input_tokens": 12011.586206896553,
+    "avg_output_tokens": 2056.1724137931033,
+    "avg_total_tokens": 14067.758620689656,
+    "avg_cached_input_tokens": 8792.275862068966,
+    "avg_reasoning_tokens": 1608.7931034482758,
+    "avg_duration_ms": 115075.0,
+    "p50_duration_ms": 117619,
+    "p95_duration_ms": 195055,
+    "avg_llm_calls": 5.310344827586207,
+    "avg_tool_calls": 3.4827586206896552
+  },
+  "process": {
+    "invalid_tool_call_rate": 0.02912621359223301,
+    "repeated_tool_call_rate": 0.14563106796116504,
+    "rollback_rate": 0.0,
+    "compact_events": 5
+  },
+  "failures": {
+    "provider": 1
+  }
+}

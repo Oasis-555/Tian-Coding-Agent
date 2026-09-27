@@ -1,0 +1,62 @@
+{
+  "task_id": "fix_parse_bool",
+  "run_index": 1,
+  "success": true,
+  "mode": "mock",
+  "duration_ms": 186,
+  "llm_calls": [
+    {
+      "duration_ms": 0,
+      "input_tokens": 3610,
+      "output_tokens": 150,
+      "total_tokens": 3760,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "token_source": "mock_estimate",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 0,
+      "input_tokens": 3775,
+      "output_tokens": 25,
+      "total_tokens": 3800,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "token_source": "mock_estimate",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 0,
+      "input_tokens": 455,
+      "output_tokens": 25,
+      "total_tokens": 480,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "token_source": "mock_estimate",
+      "tool_specs": 0
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "write_file",
+      "args": {
+        "path": "config_utils.py",
+        "content": "def parse_bool(value):\n    if isinstance(value, bool):\n        return value\n    normalized = str(value).strip().lower()\n    if normalized in {'true', 'yes', '1', 'on'}:\n        return True\n    if normalized in {'false', 'no', '0', 'off'}:\n        return False\n    raise ValueError(f'invalid boolean value: {value}')\n"
+      },
+      "is_error": false,
+      "duration_ms": 3,
+      "repeated": false,
+      "changed_files": [
+        "config_utils.py"
+      ],
+      "rolled_back_files": []
+    }
+  ],
+  "context_events": [],
+  "checker_command": "python -c \"from config_utils import parse_bool; assert all(parse_bool(v) for v in [True,'TRUE','yes','1','On']); assert not any(parse_bool(v) for v in [False,'FALSE','no','0','off'])\"",
+  "checker_exit_code": 0,
+  "checker_output": "",
+  "final_answer": "Task completed.",
+  "error": "",
+  "failure_type": ""
+}

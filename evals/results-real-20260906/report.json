@@ -1,0 +1,27 @@
+{
+  "tasks": 1,
+  "runs": 3,
+  "k": 3,
+  "result": {
+    "pass_rate": 0.3333333333333333,
+    "pass_at_k": 1.0,
+    "pass_power_k": 0.0
+  },
+  "efficiency": {
+    "avg_input_tokens": 1612.6666666666667,
+    "avg_output_tokens": 629.3333333333334,
+    "avg_total_tokens": 2242.0,
+    "avg_cached_input_tokens": 682.6666666666666,
+    "avg_reasoning_tokens": 595.0,
+    "avg_duration_ms": 16449.333333333332,
+    "p50_duration_ms": 4034,
+    "p95_duration_ms": 41301,
+    "avg_tool_calls": 0.3333333333333333
+  },
+  "process": {
+    "invalid_tool_call_rate": 0.0,
+    "repeated_tool_call_rate": 0.0,
+    "rollback_rate": 0.0,
+    "compact_events": 0
+  }
+}

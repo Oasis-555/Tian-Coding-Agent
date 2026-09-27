@@ -1,0 +1,62 @@
+{
+  "task_id": "fix_inventory",
+  "run_index": 2,
+  "success": true,
+  "mode": "mock",
+  "duration_ms": 206,
+  "llm_calls": [
+    {
+      "duration_ms": 0,
+      "input_tokens": 3624,
+      "output_tokens": 199,
+      "total_tokens": 3823,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "token_source": "mock_estimate",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 0,
+      "input_tokens": 3836,
+      "output_tokens": 25,
+      "total_tokens": 3861,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "token_source": "mock_estimate",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 0,
+      "input_tokens": 517,
+      "output_tokens": 25,
+      "total_tokens": 542,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "token_source": "mock_estimate",
+      "tool_specs": 0
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "write_file",
+      "args": {
+        "path": "inventory.py",
+        "content": "class Inventory:\n    def __init__(self):\n        self._stock = {}\n\n    def add(self, name, amount):\n        if amount < 0:\n            raise ValueError('amount must be non-negative')\n        self._stock[name] = self.stock(name) + amount\n\n    def remove(self, name, amount):\n        if amount < 0 or self.stock(name) < amount:\n            raise ValueError('insufficient stock')\n        self._stock[name] -= amount\n\n    def stock(self, name):\n        return self._stock.get(name, 0)\n"
+      },
+      "is_error": false,
+      "duration_ms": 4,
+      "repeated": false,
+      "changed_files": [
+        "inventory.py"
+      ],
+      "rolled_back_files": []
+    }
+  ],
+  "context_events": [],
+  "checker_command": "python -c \"from inventory import Inventory; inv=Inventory(); inv.add('apple',3); inv.add('apple',2); assert inv.stock('apple')==5; inv.remove('apple',4); assert inv.stock('apple')==1; assert inv.stock('missing')==0\"",
+  "checker_exit_code": 0,
+  "checker_output": "",
+  "final_answer": "Task completed.",
+  "error": "",
+  "failure_type": ""
+}

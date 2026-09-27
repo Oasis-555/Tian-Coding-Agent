@@ -1,0 +1,105 @@
+{
+  "task_id": "fix_parse_bool",
+  "run_index": 2,
+  "success": true,
+  "mode": "live",
+  "duration_ms": 95074,
+  "llm_calls": [
+    {
+      "duration_ms": 2326,
+      "input_tokens": 2190,
+      "output_tokens": 92,
+      "total_tokens": 2282,
+      "cached_input_tokens": 1536,
+      "reasoning_tokens": 73,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 3924,
+      "input_tokens": 2309,
+      "output_tokens": 178,
+      "total_tokens": 2487,
+      "cached_input_tokens": 2048,
+      "reasoning_tokens": 43,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 5980,
+      "input_tokens": 2508,
+      "output_tokens": 286,
+      "total_tokens": 2794,
+      "cached_input_tokens": 2048,
+      "reasoning_tokens": 19,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 2634,
+      "input_tokens": 2834,
+      "output_tokens": 109,
+      "total_tokens": 2943,
+      "cached_input_tokens": 2048,
+      "reasoning_tokens": 17,
+      "token_source": "provider",
+      "tool_specs": 40
+    },
+    {
+      "duration_ms": 30810,
+      "input_tokens": 783,
+      "output_tokens": 1492,
+      "total_tokens": 2275,
+      "cached_input_tokens": 256,
+      "reasoning_tokens": 1274,
+      "token_source": "provider",
+      "tool_specs": 0
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "read_file",
+      "args": {
+        "path": "config_utils.py"
+      },
+      "is_error": false,
+      "duration_ms": 2,
+      "repeated": false,
+      "changed_files": [],
+      "rolled_back_files": []
+    },
+    {
+      "name": "edit_file",
+      "args": {
+        "path": "config_utils.py",
+        "old": "def parse_bool(value):\n    return bool(value)",
+        "new": "def parse_bool(value):\n    if isinstance(value, bool):\n        return value\n    if isinstance(value, str):\n        lower = value.lower()\n        if lower in (\"true\", \"yes\", \"1\", \"on\"):\n            return True\n        if lower in (\"false\", \"no\", \"0\", \"off\"):\n            return False\n    raise ValueError(f\"Cannot parse as bool: {value!r}\")"
+      },
+      "is_error": false,
+      "duration_ms": 3,
+      "repeated": false,
+      "changed_files": [
+        "config_utils.py"
+      ],
+      "rolled_back_files": []
+    },
+    {
+      "name": "bash",
+      "args": {
+        "command": "python -c \"\nfrom config_utils import parse_bool\n\n# booleans\nassert parse_bool(True) is True\nassert parse_bool(False) is False\n\n# case-insensitive true-ish strings\nassert parse_bool('true') is True\nassert parse_bool('True') is True\nassert parse_bool('TRUE') is True\nassert parse_bool('yes') is True\nassert parse_bool('1') is True\nassert parse_bool('on') is True\nassert parse_bool('ON') is True\n\n# case-insensitive false-ish strings\nassert parse_bool('false') is False\nassert parse_bool('False') is False\nassert parse_bool('FALSE') is False\nassert parse_bool('no') is False\nassert parse_bool('0') is False\nassert parse_bool('off') is False\nassert parse_bool('OFF') is False\n\n# invalid values raise ValueError\nfor bad in [None, 2, 'maybe', '', [], '2']:\n    try:\n        parse_bool(bad)\n        print(f'FAIL: {bad!r} did not raise')\n    except ValueError:\n        pass\n\nprint('All tests passed')\n\"\n"
+      },
+      "is_error": false,
+      "duration_ms": 147,
+      "repeated": false,
+      "changed_files": [],
+      "rolled_back_files": []
+    }
+  ],
+  "context_events": [],
+  "checker_command": "D:\\pi-mono\\pi-mono-main\\py-coding-agent\\.venv\\Scripts\\python.exe -c \"from config_utils import parse_bool; assert all(parse_bool(v) for v in [True,'TRUE','yes','1','On']); assert not any(parse_bool(v) for v in [False,'FALSE','no','0','off'])\"",
+  "checker_exit_code": 0,
+  "checker_output": "",
+  "final_answer": "Fixed `config_utils.py` so `parse_bool(value)` now:\n\n- Returns `True`/`False` when given a boolean\n- Returns `True` for case-insensitive strings `true`, `yes`, `1`, `on`\n- Returns `False` for case-insensitive strings `false`, `no`, `0`, `off`\n- Raises `ValueError` for all other inputs\n\nFile changed: `config_utils.py`",
+  "error": "",
+  "failure_type": ""
+}

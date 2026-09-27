@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "py-coding-agent"
+version = "0.1.0"
+description = "Small Python coding agent with OpenAI-compatible tool calling"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+py-coding-agent = "py_coding_agent.cli:main"
+py-coding-agent-eval = "py_coding_agent.eval:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
